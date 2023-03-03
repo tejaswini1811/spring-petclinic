@@ -1,10 +1,16 @@
-node('jenkins'){
-    stage('vcs'){
-        git url: 'https://github.com/tejaswini1811/spring-petclinic.git',
-        branch: 'scripted'
+pipeline{
+    agent{ label 'jenkins' }
+    stages{
+        stage('vcs'){
+            steps{
+              git url: 'https://github.com/tejaswini1811/spring-petclinic.git',
+                  branch: 'declarative'
+            }
+        }
+        stage('package'){
+            steps{
+                sh './mvnw package'
+            }
+        }
     }
-    stage('build'){
-        sh './mvnw package'
-    }
-      
 }
