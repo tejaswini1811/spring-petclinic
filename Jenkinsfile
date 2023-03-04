@@ -4,7 +4,7 @@ node('jenkins'){
             branch: 'scripted'
     }
     stage('package'){
-        tools jdk 'JAVA-17-UBUNTU'
+        tools 'JAVA-17-UBUNTU'
     }
     stage('build'){
         sh './gradlew assemble'
