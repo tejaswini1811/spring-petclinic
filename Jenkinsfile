@@ -4,7 +4,7 @@ node('jenkins'){
             branch: 'scripted'
     }
     stage('build'){
-        sh './mvnw package'
+        sh './gradlew assemble'
     }
       
 }
