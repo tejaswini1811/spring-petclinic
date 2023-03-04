@@ -13,5 +13,10 @@ pipeline{
                 sh './gradlew assemble'
             }
         }
+        stage('mail'){
+            steps{
+                mail to: 'jenkins@gmail.com'
+            }
+        }
     }
 }
