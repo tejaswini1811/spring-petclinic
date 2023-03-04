@@ -15,8 +15,8 @@ pipeline{
         }
         stage('mail'){
             steps{
-                mail subject: 'jenkins spc'
-                to: 'jenkins@gmail.com'
+                mail subject: 'jenkins spc',
+                to: 'jenkins@gmail.com',
                 body: 'hiiiii'
             }
         }
