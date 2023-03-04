@@ -5,7 +5,7 @@ node('jenkins'){
     }
     stage('package'{
         tools {
-            jdk 'JDK-17-UBUNTU'
+            jdk 'JAVA-17-UBUNTU'
         }
     })
     stage('build'){
