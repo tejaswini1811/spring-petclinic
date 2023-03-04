@@ -9,6 +9,13 @@ pipeline{
         }
         stage('package'){
             steps{
+                tools{
+                    jdk 'JDK-17-UBUNTU'
+                }
+            }
+        }
+        stage('build'){
+            steps{
                 sh './gradlew assemble'
             }
         }
