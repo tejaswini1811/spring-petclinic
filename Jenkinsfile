@@ -1,6 +1,6 @@
 pipeline{
     agent{ label 'jenkins' }
-    tools{ jdk 'JDK-17-UBUNTU'}
+    tools{ jdk 'JAVA_17_UBUNTU'}
     stages{
         stage('vcs'){
             steps{
