@@ -13,7 +13,7 @@ jobs:
           javaHomeOption: 'Path'
           jdkDirectory: '/usr/lib/jvm/java-17-openjdk-amd64'
           mavenVersionOption: 'Path'
-          mavenDirectory: '/usr/share/maven'
+          mavenDirectory: '/opt/apache-maven-3.6.3'
           sonarQubeRunAnalysis: true
           isJacocoCoverageReportXML: true
           sqMavenPluginVersionChoice: 'latest'
