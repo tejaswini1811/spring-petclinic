@@ -18,9 +18,9 @@ jobs:
           publishJUnitResults: true
           testResultsFiles: '**/surefire-reports/TEST-*.xml' 
           javaHomeOption: 'Path'
-          jdkDirectory: '/usr/'
+          jdkDirectory: '/usr/lib/jvm/java-17-openjdk-amd64'
           mavenVersionOption: 'Path'
-          mavenDirectory: ''
+          mavenDirectory: '/usr/share/maven'
           sonarQubeRunAnalysis: true
           isJacocoCoverageReportXML: true
           sqMavenPluginVersionChoice: 'latest'
