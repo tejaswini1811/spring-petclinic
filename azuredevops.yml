@@ -25,3 +25,5 @@ jobs:
           isJacocoCoverageReportXML: true
           sqMavenPluginVersionChoice: 'latest'
 
+
+
