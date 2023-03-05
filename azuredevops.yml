@@ -1,0 +1,27 @@
+---
+pool: 'Default'
+trigger:
+  - azuredevops
+jobs:
+  - job: 'spc_sonar'
+    steps:
+      - task: SonarQubePrepare@5
+        inputs:
+          SonarQube: 'sonar'
+          scannerMode: 'MSBuild'
+          projectKey: 'tejaswini1811_spring-petclinic'
+          projectName: 'spc_sonar'
+          projectVersion: '1.0'
+      - task: Maven@3 
+        inputs:
+          mavenPOMFile: 'pom.xml'
+          publishJUnitResults: true
+          testResultsFiles: '**/surefire-reports/TEST-*.xml' 
+          javaHomeOption: 'Path'
+          jdkDirectory: '/usr/'
+          mavenVersionOption: 'Path'
+          mavenDirectory: ''
+          sonarQubeRunAnalysis: true
+          isJacocoCoverageReportXML: true
+          sqMavenPluginVersionChoice: 'latest'
+
