@@ -384,3 +384,7 @@
   </profiles>
 
 </project>
+<properties>
+  <sonar.organization>tejaswini1811</sonar.organization>
+  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+</properties>
