@@ -8,10 +8,9 @@ jobs:
       - task: SonarQubePrepare@5
         inputs:
           SonarQube: 'sonar'
-          scannerMode: 'MSBuild'
-          projectKey: 'tejaswini1811_spc-az'
-          projectName: 'spc_az'
+          scannerMode: 'Maven/Gradle'
           projectVersion: '1.0'
+          extraProperties: 'sonar.projectKey=tejaswini1811_spc-az'
       - task: Maven@3 
         inputs:
           mavenPOMFile: 'pom.xml'
@@ -25,6 +24,9 @@ jobs:
           sonarQubeRunAnalysis: true
           isJacocoCoverageReportXML: true
           sqMavenPluginVersionChoice: 'latest'
+      - task: SonarQubePublish@5
+        inputs:
+          pollingTimeoutSec: '300'
 
 
 
