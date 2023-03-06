@@ -8,7 +8,7 @@ jobs:
       - task: SonarQubePrepare@5
         inputs:
           SonarQube: 'sonar'
-          scannerMode: 'Maven'
+          scannerMode: 'Other'
           projectVersion: '1.0'
           extraProperties: 'sonar.projectKey=tejaswini1811_spc-az'
       - task: Maven@3 
