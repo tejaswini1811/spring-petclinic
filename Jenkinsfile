@@ -1,6 +1,9 @@
 pipeline{
     agent{ label 'JDK_17' }
-    tools{ jdk 'JDK_17_UBUNTU'}
+    tools{
+        jdk 'JDK_17_UBUNTU'
+        maven 'MVN_3.6.3'  
+    }
     stages{
         stage('vcs'){
             steps{
@@ -9,7 +12,6 @@ pipeline{
             }
         }
         stage('build'){
-            tools { maven 'MVN_3.6.3'}
             steps{
                 sh 'mvn package'
             }
@@ -17,7 +19,7 @@ pipeline{
         stage('sonar analysis'){
             steps{
                   withSonarQubeEnv('SONAR_JENKINS'){
-                    sh 'mvn clean package sonar:sonar -Dsonar.organization=springpetclinic1'
+                    sh 'mvn clean package org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.organization=tejaswini1811'
                   }
             }
         }

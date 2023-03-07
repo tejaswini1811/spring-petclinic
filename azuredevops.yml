@@ -24,6 +24,7 @@ jobs:
           sonarQubeRunAnalysis: true
           isJacocoCoverageReportXML: true
           sqMavenPluginVersionChoice: 'latest'
+      - script: 
       - task: SonarQubePublish@5
         inputs:
           pollingTimeoutSec: '300'
