@@ -11,7 +11,6 @@ pipeline{
                   branch: 'sonar'
             }
         }
-        }
         stage('build'){
             steps{
                 mail subjet: "Jenkins Build of ${JOB_NAME} with id ${BUILD_ID} is started",
@@ -38,3 +37,4 @@ pipeline{
             }
         }
     }
+}
