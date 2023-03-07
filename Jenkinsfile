@@ -13,11 +13,11 @@ pipeline{
         }
         stage('build'){
             steps{
-                mail subjet: "Jenkins Build of ${JOB_NAME} with id ${BUILD_ID} is started",
+                mail subject: "Jenkins Build of ${JOB_NAME} with id ${BUILD_ID} is started",
                      body: "Use this URL ${BUILD_URL} for more info",
                      to: 'all@gmail.com'
                 sh 'mvn package'
-                mail subjet: "Jenkins Build of ${JOB_NAME} with id ${BUILD_ID} is completed",
+                mail subject: "Jenkins Build of ${JOB_NAME} with id ${BUILD_ID} is completed",
                      body: "Use this URL ${BUILD_URL} for more info",
                      to: 'all@gmail.com'
             }
