@@ -11,15 +11,22 @@ pipeline{
                   branch: 'sonar'
             }
         }
+        }
         stage('build'){
             steps{
+                mail subjet: "Jenkins Build of ${JOB_NAME} with id ${BUILD_ID} is started",
+                     body: "Use this URL ${BUILD_URL} for more info",
+                     to: 'all@gmail.com'
                 sh 'mvn package'
+                mail subjet: "Jenkins Build of ${JOB_NAME} with id ${BUILD_ID} is completed",
+                     body: "Use this URL ${BUILD_URL} for more info",
+                     to: 'all@gmail.com'
             }
         }
         stage('sonar analysis'){
             steps{
                   withSonarQubeEnv('SONAR_JENKINS'){
-                    sh 'mvn clean package org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.organization=tejaswini1811'
+                    sh 'mvn clean package sonar:sonar -Dsonar.organization=spc-jenkins -Dsonar.projectKey=spc-jenkins_petclinic'
                   }
             }
         }
