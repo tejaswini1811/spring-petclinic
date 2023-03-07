@@ -9,6 +9,7 @@ pipeline{
             }
         }
         stage('build'){
+            tools { maven 'MVN_3.6.3'}
             steps{
                 sh 'mvn package'
             }
