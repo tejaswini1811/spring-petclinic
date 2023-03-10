@@ -24,7 +24,14 @@ jobs:
           sonarQubeRunAnalysis: true
           isJacocoCoverageReportXML: true
           sqMavenPluginVersionChoice: 'latest'
-      - script: 
+      - task: PublishBuildArtifacts@1
+        inputs: 
+          PathtoPublish: '$(Build.Repository.LocalPath)/target/spring-petclinic-2.7.3.jar'
+          ArtifactName: 'spc'
+      - task: DownloadPipelineArtifact@2
+        inputs:
+          artifactName: spc
+          targetPath: /tmp/
       - task: SonarQubePublish@5
         inputs:
           pollingTimeoutSec: '300'
