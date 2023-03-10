@@ -1,0 +1,24 @@
+---
+pool: 'Default'
+trigger:
+  - jfrog
+jobs:
+  - job: spc-jfrog
+    steps:
+      - task: JFrogMaven@1
+        inputs:
+          mavenPomFile: 'pom.xml'
+          goals: 'install'
+          artifactoryResolverService: 'JFROG_CLOUD'
+          targetResolveReleaseRepo: 'libs-release'
+          targetResolveSnapshotRepo: 'libs-snapshot'
+          artifactoryDeployService: 'JFROG_CLOUD'
+          targetDeployReleaseRepo: 'libs-release'
+          targetDeploySnapshotRepo: 'libs-snapshot'
+          filterDeployedArtifacts: true
+          includePatterns: 'artifact-*.jar,artifact-*.pom'
+          excludePatterns: 'artifact-*-test.jar,artifact-*-test.pom'
+          collectBuildInfo: true
+          buildName: '$(Build.DefinitionName)'
+          buildNumber: '$(Build.BuildNumber)'
+          includeEnvVars: true
