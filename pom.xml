@@ -383,5 +383,11 @@
       </build>
     </profile>
   </profiles>
- 
+ <distributionManagement>
+    <snapshotRepository>
+        <id>snapshots</id>
+        <name>a0wykzru6dpdt-artifactory-primary-0-snapshots</name>
+        <url>https://tejaswini18.jfrog.io/artifactory/libs-snapshot</url>
+    </snapshotRepository>
+</distributionManagement>
 </project>
