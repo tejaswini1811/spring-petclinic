@@ -9,10 +9,10 @@ jobs:
         inputs:
           mavenPomFile: 'pom.xml'
           goals: 'install'
-          artifactoryResolverService: 'JFROG_CLOUD'
+          artifactoryResolverService: 'jfrog'
           targetResolveReleaseRepo: 'libs-release'
           targetResolveSnapshotRepo: 'libs-snapshot'
-          artifactoryDeployService: 'JFROG_CLOUD'
+          artifactoryDeployService: 'jfrog'
           targetDeployReleaseRepo: 'libs-release'
           targetDeploySnapshotRepo: 'libs-snapshot'
           filterDeployedArtifacts: true
