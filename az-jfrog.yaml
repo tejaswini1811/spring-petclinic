@@ -3,22 +3,37 @@ pool: 'Default'
 trigger:
   - jfrog
 jobs:
-  - job: spc_jfrog
+  - job: 'spc_jfrog'
     steps:
-      - task: JFrogMaven@1
+      - task: SonarQubePrepare@5
         inputs:
-          mavenPomFile: 'pom.xml'
-          goals: 'install'
-          artifactoryResolverService: 'jfrog'
-          targetResolveReleaseRepo: 'libs-release'
-          targetResolveSnapshotRepo: 'libs-snapshot'
-          artifactoryDeployService: 'jfrog'
-          targetDeployReleaseRepo: 'libs-release'
-          targetDeploySnapshotRepo: 'libs-snapshot'
-          filterDeployedArtifacts: true
-          includePatterns: 'artifact-*.jar,artifact-*.pom'
-          excludePatterns: 'artifact-*-test.jar,artifact-*-test.pom'
-          collectBuildInfo: true
+          SonarQube: 'sonar'
+          scannerMode: 'Other'
+          projectVersion: '1.0'
+          extraProperties: 'sonar.projectKey=tejaswini1811_spc-az'
+      - task: Maven@3 
+        inputs:
+          mavenPOMFile: 'pom.xml'
+          goals: 'package'
+          publishJUnitResults: true
+          testResultsFiles: '**/surefire-reports/TEST-*.xml' 
+          javaHomeOption: 'Path'
+          jdkDirectory: '/usr/lib/jvm/java-17-openjdk-amd64'
+          mavenVersionOption: 'Path'
+          mavenDirectory: '/opt/apache-maven-3.6.3'
+          sonarQubeRunAnalysis: true
+          isJacocoCoverageReportXML: true
+          sqMavenPluginVersionChoice: 'latest'
+      - task: JFrogPublishBuildInfo@1
+        inputs:
           buildName: '$(Build.DefinitionName)'
           buildNumber: '$(Build.BuildNumber)'
-          includeEnvVars: true
+          excludeEnvVars: '*password*;*psw*;*secret*;*key*;*token*;*auth*;'
+      - task: SonarQubePublish@5
+        inputs:
+          pollingTimeoutSec: '300'
+      - task: JFrogPublishBuildInfo@1
+        inputs:
+          artifactoryConnection: 'jfrog'
+          buildName: '$(Build.DefinitionName)'
+          buildNumber: '$(Build.BuildNumber)'
