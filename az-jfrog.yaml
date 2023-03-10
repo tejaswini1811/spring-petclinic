@@ -3,7 +3,7 @@ pool: 'Default'
 trigger:
   - jfrog
 jobs:
-  - job: spc-jfrog
+  - job: spc_jfrog
     steps:
       - task: JFrogMaven@1
         inputs:
