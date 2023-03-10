@@ -8,18 +8,51 @@ pipeline{
         stage('vcs'){
             steps{
               git url: 'https://github.com/tejaswini1811/spring-petclinic.git',
-                  branch: 'sonar'
+                  branch: 'jfrog'
             }
         }
-        stage('build'){
-            steps{
-                mail subject: "Jenkins Build of ${JOB_NAME} with id ${BUILD_ID} is started",
-                     body: "Use this URL ${BUILD_URL} for more info",
-                     to: 'all@gmail.com'
-                sh 'mvn package'
-                mail subject: "Jenkins Build of ${JOB_NAME} with id ${BUILD_ID} is completed",
-                     body: "Use this URL ${BUILD_URL} for more info",
-                     to: 'all@gmail.com'
+
+        stage ('Artifactory configuration') {
+            steps {
+                rtServer (
+                    id: "ARTIFACTORY_SPC",
+                    url: 'https://tejaswini18.jfrog.io/artifactory',
+                    credentialsId: 'JFROG'
+                )
+
+                rtMavenDeployer (
+                    id: "MAVEN_DEPLOYER",
+                    serverId: "ARTIFACTORY_SPC",
+                    releaseRepo: 'libs-release-1',
+                    snapshotRepo: 'libs-snapshot-1'
+                )
+
+                rtMavenResolver (
+                    id: "MAVEN_RESOLVER",
+                    serverId: "ARTIFACTORY_SPC",
+                    releaseRepo: 'libs-release-1',
+                    snapshotRepo: 'libs-snapshot-1'
+                )
+            }
+        }
+
+        stage ('Exec Maven') {
+            steps {
+                rtMavenRun (
+                    tool: 'MVN_3.6.3', // Tool name from Jenkins configuration
+                    pom: 'pom.xml',
+                    goals: 'clean install',
+                    deployerId: "MAVEN_DEPLOYER",
+                    resolverId: "MAVEN_RESOLVER"
+                )
+            }
+        }
+
+        stage ('Publish build info') {
+            steps {
+                rtPublishBuildInfo (
+                    serverId: "ARTIFACTORY_SPC"
+                )
             }
         }
         stage('sonar analysis'){
