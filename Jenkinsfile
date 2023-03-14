@@ -8,7 +8,7 @@ pipeline{
         stage('vcs'){
             steps{
               git url: 'https://github.com/tejaswini1811/spring-petclinic.git',
-                  branch: 'sonar'
+                  branch: 'gradle'
             }
         }
         stage('build'){
